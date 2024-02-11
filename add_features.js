@@ -164,4 +164,15 @@ function displayResults() {
   result_HTML += `<p>Total Score: ${score}/${quizData.length}</p>`;
 
   quiz.innerHTML = result_HTML;
+  checkTotalScore();
+}
+
+// add grade to total score
+function checkTotalScore() {
+  let gradeDisplay = `<h2>Your Grade is</h2>`;
+  if (score < 2) {
+    gradeDisplay.innerText = "You are smart";
+  }
+
+  return gradeDisplay;
 }
