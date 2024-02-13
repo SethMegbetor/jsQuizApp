@@ -132,6 +132,51 @@ submitBtn.addEventListener("click", () => {
   }
 });
 
+// function displayResults() {
+//   let result_HTML = `<h2>Quiz Results</h2>`;
+//   userAnswers.forEach((userAnswer, index) => {
+//     const question_number = index + 1;
+
+//     let userIndexValue = userAnswer.selection_answer;
+
+//     result_HTML += `<p><strong>${question_number}.</strong> ${userAnswer.question} </p>`;
+//     result_HTML += `<p><strong>Your Answer:</strong> ${
+//       quizData[index][userAnswer.selection_answer]
+//     }</p>`;
+//     // result_HTML += `<p><strong>Your Answer:</strong> ${quizData[index]}</p>`;
+//     result_HTML += `<p><strong>Result: ${
+//       userAnswer.isCorrect ? "Correct" : "Incorrect"
+//     }</strong></p>`;
+
+//     if (!userAnswer.isCorrect) {
+//       result_HTML += `<p><strong>Correct Answer is: </strong> ${
+//         quizData[index][
+//           userAnswer.isCorrect
+//             ? userAnswer.selection_answer
+//             : quizData[index].correct
+//         ]
+//       }</p>`;
+//     }
+
+//     // result_HTML += `<p><strong>Correct Answer: ${quizData[index].correct}</strong></p>`;
+//   });
+
+//   result_HTML += `<p>Total Score: ${score}/${quizData.length}</p>`;
+
+//   quiz.innerHTML = result_HTML;
+//   checkTotalScore();
+// }
+
+// // add grade to total score
+// function checkTotalScore() {
+//   let gradeDisplay = `<h2>Your Grade is</h2>`;
+//   if (score < 2) {
+//     gradeDisplay.innerText = "You are smart";
+//   }
+
+//   return gradeDisplay;
+// }
+
 function displayResults() {
   let result_HTML = `<h2>Quiz Results</h2>`;
   userAnswers.forEach((userAnswer, index) => {
@@ -143,7 +188,6 @@ function displayResults() {
     result_HTML += `<p><strong>Your Answer:</strong> ${
       quizData[index][userAnswer.selection_answer]
     }</p>`;
-    // result_HTML += `<p><strong>Your Answer:</strong> ${quizData[index]}</p>`;
     result_HTML += `<p><strong>Result: ${
       userAnswer.isCorrect ? "Correct" : "Incorrect"
     }</strong></p>`;
@@ -157,21 +201,27 @@ function displayResults() {
         ]
       }</p>`;
     }
-
-    // result_HTML += `<p><strong>Correct Answer: ${quizData[index].correct}</strong></p>`;
   });
 
   result_HTML += `<p>Total Score: ${score}/${quizData.length}</p>`;
 
+  // Add grading based on total score
+  let gradeDisplay = checkTotalScore();
+  result_HTML += gradeDisplay;
+
   quiz.innerHTML = result_HTML;
-  checkTotalScore();
 }
 
-// add grade to total score
+// Function to calculate grade based on total score
 function checkTotalScore() {
-  let gradeDisplay = `<h2>Your Grade is</h2>`;
-  if (score < 2) {
-    gradeDisplay.innerText = "You are smart";
+  let gradeMark = "a";
+  let gradeDisplay = `<h2>Your Grade is ${score}</h2>`;
+  if (score >= 2 && score < 4) {
+    gradeDisplay += `<p>Good Job! You passed.</p>`;
+  } else if (score >= 4) {
+    gradeDisplay += `<p>Congratulations! You excelled.</p>`;
+  } else {
+    gradeDisplay += `<p>Oops! You didn't pass. Keep practicing.</p>`;
   }
 
   return gradeDisplay;
